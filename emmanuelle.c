@@ -111,7 +111,7 @@ void prtTraversal(Graph graph, int iAirportVertex, int indent)
 
 	for(e = graph->vertexM[iAirportVertex].successorList; e != NULL; e=e->pNextEdge)
 	{
-		printf("%s\n", "egg" );
+		
 	}
 }
 
@@ -119,24 +119,3 @@ void prtTraversal(Graph graph, int iAirportVertex, int indent)
 //program 6
 //deleteFlight
 
-
-
-void prtFlightsByOrigin(Graph graph)
-{
-	//PRINT HEADER
-	//Apt(airport) F#(flight #)  Dest(destination) Dep(depart time) Arr(arrive time) Dur(flight duration)
-
-	//for each airport (meaning every individual airport that exists && is the starting point
-	//for flights), print out every flight+destination+times associated with airport
-
-	//for loop to go through graph->vertexM[]
-
-		// base case: IF vertex successorList is NULL, continue;
-
-		//otherwise: go through successorList, successorList->pNextEdge, etc etc until pNextEdge is NULL
-			//while going through list, print out desired information as defined by header
-			//(so like successorList->flight->szFlightNr for example)
-
-			//when pNextEdge == NULL, break from this loop
-
-}
