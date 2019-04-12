@@ -21,7 +21,6 @@ void getFlights(Graph graph)
 	int iPrevArrTm2400;
 	Flight flight;
 	int iVertex = 0;
-	int i;
 
 	while (fgets(szInputBuffer, MAX_LINE_SIZE, stdin) != NULL)
 	{
@@ -50,33 +49,40 @@ void getFlights(Graph graph)
 		{
 			prtFlightsByOrigin(graph);
 		}
+		setNotVisited(Graph graph);
 		if (strcmp(szRecordType, "PRTFLIGHTBYDEST") == 0)
 		{
 			prtFlightsByDest(graph);
 		}
+		setNotVisited(Graph graph);
 		if (strcmp(szRecordType, "PRTONE") == 0)
 		{
 			sscanf(pszRemainingTxt, "%s", szAirport);
 			iVertex = findAirport(graph, szAirport);
 			prtOne(graph, iVertex);
 		}
+		setNotVisited(Graph graph);
 		if (strcmp(szRecordType, "PRTALL") == 0)
 		{
 			printAll(graph);
 		}
+		setNotVisited(Graph graph);
 		if (strcmp(szRecordType, "PRTSUCC") == 0)
 		{
 			sscanf(pszRemainingTxt, "%s", szAirport);
 			iVertex = findAirport(graph, szAirport);
 			prtTraversal(graph, iVertex, iIndent);
-		}/*
+		}
+		setNotVisited(Graph graph);
 		if (strcmp(szRecordType, "PRTCHRON") == 0)
 		{
 			sscanf(pszRemaintingTxt, "%s", szAiport);
 			iVertex = findAirport(graph, szAirport);
 			iPrevArrTm2400 = calcArr2400(flight.iDepTm2400, flight.iDurationMins, flight.iZoneChange);
 			prtTraversalChron(graph, iVertex, iIndent, iPrevArrTm2400);
-		}*/
+		}
+		setNotVisited(Graph graph);
+		*/
 	}
 
 }
