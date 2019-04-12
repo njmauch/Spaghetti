@@ -42,7 +42,6 @@ void getFlights(Graph graph)
 			{
 				insertVertex(graph, flight.szDest);
 			}
-			//insertFlight(graph, flight);
 			insertFlight(graph, flight, &graph->vertexM[findAirport(graph, flight.szDest)].predecessorList);
 			insertFlight(graph, flight, &graph->vertexM[findAirport(graph, flight.szOrigin)].successorList);
 		}
@@ -73,6 +72,8 @@ void getFlights(Graph graph)
 		}/*
 		if (strcmp(szRecordType, "PRTCHRON") == 0)
 		{
+			sscanf(pszRemaintingTxt, "%s", szAiport);
+			iVertex = findAirport(graph, szAirport);
 			iPrevArrTm2400 = calcArr2400(flight.iDepTm2400, flight.iDurationMins, flight.iZoneChange);
 			prtTraversalChron(graph, iVertex, iIndent, iPrevArrTm2400);
 		}*/
@@ -105,55 +106,7 @@ int insertFlight(Graph graph, Flight flight, EdgeNode **eList)
 		ePrecedes->pNextEdge = eNew;
 	}
 	return;
-}/*
-int insertFlight(Graph graph, Flight flight)
-{
-	EdgeNode *eNew, *eNew2;
-	EdgeNode *eFind, *eFind2;
-	EdgeNode *ePrecedes, *ePrecedes2;
-	EdgeNode *ePred = graph->vertexM[findAirport(graph, flight.szOrigin)].predecessorList;
-	EdgeNode *eSucc = graph->vertexM[findAirport(graph, flight.szOrigin)].successorList;
-
-	eFind = searchEdgeNode(&ePred, flight.szFlightNr, &ePrecedes);
-	if (eFind != NULL)
-	{
-		eNew = allocateEdgeNode(graph, flight);
-		eNew->pNextEdge = eFind->pNextEdge;
-		eFind->pNextEdge = eNew;
-		//return;
-	}
-	eNew = allocateEdgeNode(graph, flight);
-	if (ePrecedes == NULL)
-	{
-		eNew->pNextEdge = graph->vertexM[findAirport(graph, flight.szOrigin)].predecessorList;
-		graph->vertexM[findAirport(graph, flight.szOrigin)].predecessorList = eNew;
-	}
-	else
-	{
-		eNew->pNextEdge = ePrecedes->pNextEdge;
-		ePrecedes->pNextEdge = eNew;
-	}
-	
-	eFind2 = searchEdgeNode(&eSucc, flight.szFlightNr, &ePrecedes2);
-	if (eFind2 != NULL)
-	{
-		eNew2 = allocateEdgeNode(graph, flight);
-		eNew2->pNextEdge = eFind2->pNextEdge;
-		eFind2->pNextEdge = eNew2;
-		//return;
-	}
-	eNew2 = allocateEdgeNode(graph, flight);
-	if (ePrecedes == NULL)
-	{
-		eNew2->pNextEdge = graph->vertexM[findAirport(graph, flight.szOrigin)].successorList;
-		graph->vertexM[findAirport(graph, flight.szOrigin)].successorList = eNew2;
-	}
-	else
-	{
-		eNew2->pNextEdge = ePrecedes2->pNextEdge;
-		ePrecedes2->pNextEdge = eNew2;
-	}
-}*/
+}
 void insertVertex(Graph graph, char szAirport[])
 {
 	strcpy(graph->vertexM[graph->iNumVertices].szAirport, szAirport);
@@ -212,16 +165,8 @@ EdgeNode *searchEdgeNode(EdgeNode *e, char szFlightNr[3], EdgeNode **ePrecedes)
 			errExit("Duplicate flight number");
 			return e;
 		}
-		//if (strcmp(szFlightNr, e->flight.szFlightNr) > 0)
-		//{
-			//return e;
-			//*ePrecedes = e;
-			//return NULL;
-		//}
 		if (strcmp(szFlightNr, e->flight.szFlightNr) < 0)
 		{
-			//return e;
-			//*ePrecedes = e;
 			return NULL;
 		}
 		*ePrecedes = e;
