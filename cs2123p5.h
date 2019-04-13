@@ -100,8 +100,7 @@ void prtTraversalChron(Graph graph, int iVertex, int iIndent, int iPrevArrTm2400
 // Non-recursive for program 5
 int calcArr2400(int iDepTime2400, int iDurationMins, int iZoneChange);
 int findAirport(Graph graph, char szAirport[]);
-//int insertFlight(Graph graph, Flight flight);
-int insertFlight(Graph graph, Flight flight, EdgeNode *eList);
+int insertFlight(Graph graph, Flight flight, EdgeNode **eList);
 void prtAll(Graph graph);
 void prtOne(Graph graph, int iVertex);
 void setNotVisited(Graph graph);
