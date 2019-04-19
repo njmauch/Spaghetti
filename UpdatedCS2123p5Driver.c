@@ -179,7 +179,7 @@ void getFlights(Graph graph)
         {
                 sscanf(pszRemainingTxt, "%s", szAirport);
                 iVertex = findAirport(graph, szAirport);
-                iPrevArrTm2400 = calcArr2400(flight.iDepTm2400, flight.iDurationMins, flight.iZoneChange);
+                iPrevArrTm2400 = 0;
                 prtTraversalChron(graph, iVertex, iIndent, iPrevArrTm2400);
         }
         // Makes sure to update all bVisted flags to FALSE
