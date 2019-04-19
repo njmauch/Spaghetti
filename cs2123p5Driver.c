@@ -18,7 +18,7 @@ void getFlights(Graph graph)
 	char szAirport[4];
 	char *pszRemainingTxt;
 	int iIndent = 0;
-	int iPrevArrTm2400;
+	int iPrevArrTm2400 = 0;
 	Flight flight;
 	int iVertex = 0;
 
@@ -44,45 +44,44 @@ void getFlights(Graph graph)
 			insertFlight(graph, flight, &graph->vertexM[findAirport(graph, flight.szDest)].predecessorList);
 			insertFlight(graph, flight, &graph->vertexM[findAirport(graph, flight.szOrigin)].successorList);
 		}
-		/*
+		
 		if (strcmp(szRecordType, "PRTFLIGHTBYORIGIN") == 0)
 		{
 			prtFlightsByOrigin(graph);
 		}
-		setNotVisited(Graph graph);
 		if (strcmp(szRecordType, "PRTFLIGHTBYDEST") == 0)
 		{
 			prtFlightsByDest(graph);
 		}
-		setNotVisited(Graph graph);
 		if (strcmp(szRecordType, "PRTONE") == 0)
 		{
 			sscanf(pszRemainingTxt, "%s", szAirport);
 			iVertex = findAirport(graph, szAirport);
+			//print header	
+			printf(" Vx Apt Predecessors %-44s\n", "Successors");
 			prtOne(graph, iVertex);
 		}
-		setNotVisited(Graph graph);
 		if (strcmp(szRecordType, "PRTALL") == 0)
 		{
-			printAll(graph);
+			
+			prtAll(graph);
 		}
-		setNotVisited(Graph graph);
 		if (strcmp(szRecordType, "PRTSUCC") == 0)
 		{
 			sscanf(pszRemainingTxt, "%s", szAirport);
 			iVertex = findAirport(graph, szAirport);
 			prtTraversal(graph, iVertex, iIndent);
+			setNotVisited(graph);
 		}
-		setNotVisited(Graph graph);
+		
 		if (strcmp(szRecordType, "PRTCHRON") == 0)
 		{
-			sscanf(pszRemaintingTxt, "%s", szAiport);
+			sscanf(pszRemainingTxt, "%s", szAirport);
 			iVertex = findAirport(graph, szAirport);
-			iPrevArrTm2400 = calcArr2400(flight.iDepTm2400, flight.iDurationMins, flight.iZoneChange);
 			prtTraversalChron(graph, iVertex, iIndent, iPrevArrTm2400);
+			setNotVisited(graph);
 		}
-		setNotVisited(Graph graph);
-		*/
+		
 	}
 
 }
@@ -280,4 +279,12 @@ void errExit(char szFmt[], ...)
 	printf("\n\tEncountered in file %s\n", __FILE__);  // this 2nd arg is filled in by
 								// the pre-compiler
 	exit(ERR_EXIT);
+}
+
+void setNotVisited(Graph graph)
+{
+	int i;  // For-loop iterator    
+	// Goes through list of vertices in graph and sets bVisted to FALSE
+	for (i = 0; i < graph->iNumVertices; i++)
+		graph->vertexM[i].bVisited = FALSE;
 }
