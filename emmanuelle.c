@@ -1,6 +1,7 @@
 #include "cs2123p5.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main(int argc, char const *argv[])
 {
@@ -74,6 +75,14 @@ void prtAll(Graph graph)
 
 }
 
+
+void printWithIndent(int indent, char * string);
+
+void printWithIndent(int indent, char * string)
+{
+    printf("%*s%s", indent, "", string);
+}
+
 //recursive functions
 // void prtTraversal(Graph graph, int iAirportVertex, int indent);
 
@@ -107,14 +116,34 @@ void prtTraversal(Graph graph, int iAirportVertex, int indent)
 
 	//change bVisited to TRUE
 	graph->vertexM[iAirportVertex].bVisited = TRUE;
+	char * successorAirport = "";
+	// printWithIndent(indent, string);
+	//idk how to use the indent lol
 
 
 	for(e = graph->vertexM[iAirportVertex].successorList; e != NULL; e=e->pNextEdge)
 	{
-		
+		int iVertexRecursive = findAirport(graph, graph->vertexM[iAirportVertex].szAirport);
+		//unsure about this one
+
+		prtTraversal(graph, iVertexRecursive, indent + 1);
 	}
 }
 
+
+//NOTE: copied from cs2123p5Driver.c just to check for compiler issues for prtTraversal()
+int findAirport(Graph graph, char szAirport[])
+{
+	int i;
+	for (i = 0; i <= graph->iNumVertices; i++)
+	{
+		if (strcmp(szAirport, graph->vertexM[i].szAirport) == 0)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
 
 //program 6
 //deleteFlight
