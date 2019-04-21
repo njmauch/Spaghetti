@@ -169,39 +169,3 @@ void prtTraversal(Graph graph, int iAirportVertex, int indent)
 }
 
 
-//NOTE: copied from cs2123p5Driver.c just to check for compiler issues for prtTraversal()
-int findAirport(Graph graph, char szAirport[])
-{
-	int i;
-	for (i = 0; i <= graph->iNumVertices; i++)
-	{
-		if (strcmp(szAirport, graph->vertexM[i].szAirport) == 0)
-		{
-			return i;
-		}
-	}
-	return -1;
-}
-
-int calcArr2400(int iDepTime2400, int iDurationMins, int iZoneChange)
-{  
-    int iHours;     // holds number of hours of iDepTime2400
-    int iMin;       // holds number of minutes of iDepTime2400
-    int iZoneAdd;   // holds number of minutes of time zone changes
-    int iTotalMin;  // holds total number of minutes of flight
-    int iArr2400;      // holds conversions of iTotalMin to 2400 time style
-    
-    // obtain number of hours
-    iHours = iDepTime2400 / 100;
-    // obtain number of minutes
-    iMin = iDepTime2400 % 100;
-    // obtain number of minutes for time zone changes
-    iZoneAdd = iZoneChange * 60;
-    // find total number of minutes of flight
-    iTotalMin = (iHours * 60) + iMin + iZoneAdd + iDurationMins;
-    // convert total number of minutes to 2400 time 
-    iArr2400 = (((iTotalMin / 60) * 100) + (iTotalMin % 60));
-    // return the new 2400 arrival time
-    return iArr2400;
-}
-
